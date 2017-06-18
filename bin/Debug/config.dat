@@ -1,0 +1,21 @@
+OutputFileName:
+OutputTimestamp:True
+Path:
+StartingPoint:175 400
+WorkingAreaSize:1640 545
+PopupSize:200 330
+MapMovementPenalty:10
+BrightnessThreshold:0,1
+DotSize:5 6
+ForbiddenAreaRadius:15
+WaitAfterGymClick:200
+WaitAfterGymInfoSelection:500
+WaitAfterGymInfoSelectionClick:1000
+WaitAfterSourceCodeCopy:200
+WaitAfterSaveToFile:200
+WaitAfterCloseTab:20
+WaitAfterClearGymPopup:200
+WaitAfterMapSetCursorPos:100
+WaitAfterMapContourMovement:100
+WaitAfterMapMovement:500
+MapMovementSteps:20

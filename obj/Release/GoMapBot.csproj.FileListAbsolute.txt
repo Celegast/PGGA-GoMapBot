@@ -1,0 +1,5 @@
+E:\PGGA\GoMapBot\bin\Release\GoMapBot.exe.config
+E:\PGGA\GoMapBot\bin\Release\GoMapBot.exe
+E:\PGGA\GoMapBot\obj\Release\GoMapBot.GoMapBot.resources
+E:\PGGA\GoMapBot\obj\Release\GoMapBot.csproj.GenerateResource.Cache
+E:\PGGA\GoMapBot\obj\Release\GoMapBot.exe
