@@ -1,8 +1,0 @@
-E:\PGGA\GoMapBot\bin\Debug\GoMapBot.exe.config
-E:\PGGA\GoMapBot\bin\Debug\GoMapBot.exe
-E:\PGGA\GoMapBot\bin\Debug\GoMapBot.pdb
-E:\PGGA\GoMapBot\obj\Debug\GoMapBot.csprojResolveAssemblyReference.cache
-E:\PGGA\GoMapBot\obj\Debug\GoMapBot.GoMapBot.resources
-E:\PGGA\GoMapBot\obj\Debug\GoMapBot.csproj.GenerateResource.Cache
-E:\PGGA\GoMapBot\obj\Debug\GoMapBot.exe
-E:\PGGA\GoMapBot\obj\Debug\GoMapBot.pdb

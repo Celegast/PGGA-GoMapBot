@@ -30,6 +30,7 @@ namespace GoMapBot
         private string CFGFILENAME = Path.GetDirectoryName(Application.ExecutablePath) + "\\config.dat";
         
         private bool _abort = false;
+        private DateTime _startTime = DateTime.Now;
 
         static private Point _startingPoint = new Point(175, 400);
         static private Size _workingArea = new Size(1640, 545);
@@ -864,6 +865,8 @@ namespace GoMapBot
             _abort = false;
             _state = STATE.START;
 
+            _startTime = DateTime.Now;
+
             actHook.Start();
             Debug.ResetText();
 
@@ -889,6 +892,10 @@ namespace GoMapBot
                 actHook.Stop();
                 Debug.AppendText("Aborted.\r\n");
                 _state = STATE.STOPPED;
+
+                // Print elapsed time
+                TimeSpan ts = DateTime.Now.Subtract(_startTime);
+                Debug.AppendText(String.Format("Elapsed time: {0:hh\\:mm\\:ss}\r\n", ts));
 
                 return;
             }
@@ -975,7 +982,20 @@ namespace GoMapBot
                         //  Take screen shot
                         _desktopGraphics.CopyFromScreen(0, 0, 0, 0, _screenSize, CopyPixelOperation.SourceCopy);
 
+                        // Calculate starting point for scan and check boundaries
                         Point starting_point = new Point(_gym_point.X - (int)(_popupSize.Width / 2), _gym_point.Y - _popupSize.Height);
+
+                        if (starting_point.X < 0)
+                        {
+                            starting_point.X = 0;
+                            Debug.AppendText("Invalid starting point (X). Check working area and popup size settings.\r\n");
+                        }
+                        if (starting_point.Y < 0)
+                        {
+                            starting_point.Y = 0;
+                            Debug.AppendText("Invalid starting point (Y). Check working area and popup size settings.\r\n");
+                        }
+
                         _greyX_point = FindBitmap(_greyX, ref _desktopBitmap, starting_point);
 
                         if (_greyX_point.Equals(new Point(0, 0)))
@@ -1001,6 +1021,18 @@ namespace GoMapBot
                 case STATE.PARSE_GYMS_5:
                     {
                         Point starting_point = new Point(_gym_point.X - (int)(_popupSize.Width / 2), _gym_point.Y - (int)(_popupSize.Height / 2));
+
+                        if (starting_point.X < 0)
+                        {
+                            starting_point.X = 0;
+                            Debug.AppendText("Invalid starting point (X). Check working area and popup size settings.\r\n");
+                        }
+                        if (starting_point.Y < 0)
+                        {
+                            starting_point.Y = 0;
+                            Debug.AppendText("Invalid starting point (Y). Check working area and popup size settings.\r\n");
+                        }
+
                         _lastUpdate_point = FindBitmap(_lastUpdate, ref _desktopBitmap, starting_point);
 
                         if (_lastUpdate_point.Equals(new Point(0, 0)))
@@ -1105,6 +1137,11 @@ namespace GoMapBot
                 case STATE.STOPPED:
                     {
                         actHook.Stop();
+
+                        // Print elapsed time
+                        TimeSpan ts = DateTime.Now.Subtract(_startTime);
+                        Debug.AppendText(String.Format("Elapsed time: {0:hh\\:mm\\:ss}\r\n", ts));
+
                         return;
                     }
             }
@@ -1429,7 +1466,7 @@ namespace GoMapBot
 
             // Debug
 #if (DEBUG_ALL || DEBUG_FIND_BITMAP)
-                Debug.AppendText(String.Format("dotSize=({0}, {1}); screenSize=({2}, {3})\r\n", dotSize.Width, dotSize.Height, screenSize.Width, screenSize.Height));
+            Debug.AppendText(String.Format("refBitmapSize=({0}, {1}); desktopBitmapSize=({2}, {3}); startingPoint=({4}, {5})\r\n", refBitmap.Width, refBitmap.Height, desktopBitmap.Width, desktopBitmap.Height, startingPoint.X, startingPoint.Y));
 #endif
 
             // Scan desktop for refBitmap
