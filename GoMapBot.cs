@@ -32,8 +32,8 @@ namespace GoMapBot
         private bool _abort = false;
         private DateTime _startTime = DateTime.Now;
 
-        static private Point _startingPoint = new Point(175, 400);
-        static private Size _workingArea = new Size(1640, 545);
+        static private Point _startingPoint = new Point(200, 330);
+        static private Size _workingArea = new Size(1580, 685);
         static private int _mapMovementPenalty = 10;
         static private float _brightnessThreshold = 0.10f;
         static private Size _dotSize = new Size(5, 6);
@@ -43,20 +43,20 @@ namespace GoMapBot
         static private bool _outputTimestamp = true;
 
         // Timing values
-        private int[] _gymParserTiming = new int[] { 200, 500, 1000, 200, 200, 20, 200 };
+        private int[] _gymParserTiming = new int[] { 200, 500, 850, 200, 200, 20, 200 };
         private int[] _moveMapTiming = new int[] { 100, 100, 500 }; 
 
         // GymParser variables
         private enum STATE { STOPPED, START, FIND_GYMS, PARSE_GYMS, PARSE_GYMS_2, PARSE_GYMS_3, PARSE_GYMS_4, PARSE_GYMS_5, SELECT_GYM_INFO, OPEN_SELECTION_SOURCE_CODE_IN_NEW_TAB, COPY_SELECTION_SOURCE_CODE_TO_CLIPBOARD, SAVE_CLIPBOARD_TO_FILE, CLOSE_TAB, CLEAR_GYM_POPUP, MOVE_MAP };
         private STATE _state = STATE.STOPPED;
         private string _output_file_name = @"gyms.txt";
-        private List<string> _path = new List<string> { "E", "S", "W", "S", "E", "E", "E", "E", "E", "S", "W", "W", "W", "W", "W", "S", "E", "E", "E", "E", "E", "S", "W", "W", "W", "S", "E", "E", "E", "S", "S", "W", "N", "W", "S", "W", "N", "W", "S", "W", "S", "E", "E", "E", "E", "E", "S", "W", "W", "W", "W", "S", "E", "E", "E", "E", "S", "W", "W", "W", "W", "S", "E", "E", "E", "E", "S", "W", "W", "W", "S", "E", "E", "E", "S", "W", "W", "W", "S", "E", "E", "E", "S", "W", "W", "S", "S", "W", "W", "S", "E", "E", "E", "S", "S" };
+        private List<string> _path = new List<string> { "E", "E", "E", "S", "W", "W", "W", "S", "E", "E", "E", "S", "W", "W", "W" };
         private int _sector = 0;
         private List<Point> _gyms;
         private int _x_not_found_counter = 0;
         private Point _gym_point, _greyX_point, _lastUpdate_point;
         private string _path_direction;
-        private Size _popupSize = new Size(200, 330);
+        private Size _popupSize = new Size(300, 280);
 
         // Init reference bitmaps
         Bitmap _greyX = new Bitmap("img/greyX.png");
@@ -665,7 +665,7 @@ namespace GoMapBot
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "GoMapBot";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GoMapBot by Celegast";
+            this.Text = "GoMapBot by Celegast (v1.0)";
             this.Load += new System.EventHandler(this.GoMapBot_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GymParser)).EndInit();
             this.groupBox1.ResumeLayout(false);
