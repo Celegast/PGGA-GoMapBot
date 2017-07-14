@@ -701,7 +701,7 @@ namespace GoMapBot
 
             assembly = System.Reflection.Assembly.LoadFrom(Application.ExecutablePath);
 
-            stream = assembly.GetManifestResourceStream("GoMapBot.pggabot.ico");
+            stream = assembly.GetManifestResourceStream("GoMapBot.GoMapBot.ico");
             this.Icon = new Icon(stream);
 
             LoadConfiguration(CFGFILENAME);
