@@ -543,7 +543,7 @@ namespace GoMapBot
             this.groupBox3.Size = new System.Drawing.Size(231, 104);
             this.groupBox3.TabIndex = 40;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Working Area";
+            this.groupBox3.Text = "Working area";
             // 
             // button_ShowArea
             // 
