@@ -32,12 +32,12 @@ namespace GoMapBot
         private bool _abort = false;
         private DateTime _startTime = DateTime.Now;
 
-        static private Point _startingPoint = new Point(200, 330);
-        static private Size _workingArea = new Size(1580, 685);
+        static private Point _startingPoint = new Point(200, 410);
+        static private Size _workingArea = new Size(1520, 595);
         static private int _mapMovementPenalty = 10;
         static private float _brightnessThreshold = 0.10f;
-        static private Size _dotSize = new Size(5, 6);
-        static private int _forbiddenAreaRadius = 15;
+        static private Size _dotSize = new Size(4, 5);
+        static private int _forbiddenAreaRadius = 18;
 
         static private int _movementSteps = 20;
         static private bool _outputTimestamp = true;
