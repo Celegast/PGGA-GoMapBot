@@ -32,7 +32,7 @@ namespace GoMapBot
         private bool _abort = false;
         private DateTime _startTime = DateTime.Now;
 
-        static private Point _startingPoint = new Point(200, 410);
+        static private Point _startingPoint = new Point(200, 335);
         static private Size _workingArea = new Size(1520, 595);
         static private int _mapMovementPenalty = 10;
         static private float _brightnessThreshold = 0.10f;
