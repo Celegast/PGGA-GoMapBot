@@ -1010,7 +1010,7 @@ namespace GoMapBot
                             }
 
                             GymParser.Interval = 1.0;
-                            _state = STATE.MOVE_MAP;
+                            _state = STATE.PARSE_GYMS; //STATE.MOVE_MAP;
                             break;
                         }
 
@@ -1040,7 +1040,7 @@ namespace GoMapBot
                             Debug.AppendText("lastUpdate not found\r\n");
 
                             GymParser.Interval = 1.0;
-                            _state = STATE.MOVE_MAP;
+                            _state = STATE.PARSE_GYMS; //STATE.MOVE_MAP;
                             break;
                         }
 
