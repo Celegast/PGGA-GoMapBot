@@ -40,16 +40,17 @@ namespace GoMapBot
         static private int _forbiddenAreaRadius = 18;
 
         static private int _movementSteps = 20;
-        static private bool _outputTimestamp = true;
+        static private bool _outputTimestamp = true, _mapScreenshots = false;
+        static private int _mapScreenshotTopPadding = 40;
 
         // Timing values
-        private int[] _gymParserTiming = new int[] { 200, 500, 850, 200, 200, 20, 200 };
+        private int[] _gymParserTiming = new int[] { 200, 500, 850, 200, 200, 50, 200 };
         private int[] _moveMapTiming = new int[] { 100, 100, 500 }; 
 
         // GymParser variables
         private enum STATE { STOPPED, START, FIND_GYMS, PARSE_GYMS, PARSE_GYMS_2, PARSE_GYMS_3, PARSE_GYMS_4, PARSE_GYMS_5, SELECT_GYM_INFO, OPEN_SELECTION_SOURCE_CODE_IN_NEW_TAB, COPY_SELECTION_SOURCE_CODE_TO_CLIPBOARD, SAVE_CLIPBOARD_TO_FILE, CLOSE_TAB, CLEAR_GYM_POPUP, MOVE_MAP };
         private STATE _state = STATE.STOPPED;
-        private string _output_file_name = @"gyms.txt";
+        private string _output_file_name = @"gyms.txt", _map_folder_name = "map";
         private List<string> _path = new List<string> { "E", "E", "E", "S", "W", "W", "W", "S", "E", "E", "E", "S", "W", "W", "W" };
         private int _sector = 0;
         private List<Point> _gyms;
@@ -65,7 +66,7 @@ namespace GoMapBot
 
         // Init desktop bitmaps
         Size _screenSize = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-        Bitmap _desktopBitmap;
+        Bitmap _desktopBitmap, _mapBitmap;
         Graphics _desktopGraphics;
 
 
@@ -93,6 +94,30 @@ namespace GoMapBot
         private System.Timers.Timer MoveMapTimer;
         private CheckBox checkBox_OutputTimestamp;
         private Label label3;
+        private CheckBox checkBox_MapScreenshots;
+        private GroupBox groupBox4;
+        private Label label14;
+        private NumericUpDown numericUpDown15;
+        private Label label12;
+        private NumericUpDown numericUpDown14;
+        private NumericUpDown numericUpDown9;
+        private Label label13;
+        private Label label8;
+        private Label label9;
+        private NumericUpDown numericUpDown13;
+        private NumericUpDown numericUpDown12;
+        private NumericUpDown numericUpDown8;
+        private NumericUpDown numericUpDown7;
+        private Label label10;
+        private Label label11;
+        private Label label7;
+        private Label label6;
+        private NumericUpDown numericUpDown11;
+        private NumericUpDown numericUpDown10;
+        private NumericUpDown numericUpDown6;
+        private NumericUpDown numericUpDown5;
+        private Label label4;
+        private Label label5;
         private System.Windows.Forms.Button ButtonStart;
 
 
@@ -352,6 +377,7 @@ namespace GoMapBot
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox_Path = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkBox_MapScreenshots = new System.Windows.Forms.CheckBox();
             this.button_ShowArea = new System.Windows.Forms.Button();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
@@ -361,6 +387,29 @@ namespace GoMapBot
             this.label1 = new System.Windows.Forms.Label();
             this.MoveMapTimer = new System.Timers.Timer();
             this.label3 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.numericUpDown15 = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.numericUpDown14 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.numericUpDown13 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown12 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GymParser)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -370,6 +419,18 @@ namespace GoMapBot
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MoveMapTimer)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.SuspendLayout();
             // 
             // ButtonStart
@@ -389,7 +450,7 @@ namespace GoMapBot
             this.Debug.Multiline = true;
             this.Debug.Name = "Debug";
             this.Debug.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Debug.Size = new System.Drawing.Size(180, 301);
+            this.Debug.Size = new System.Drawing.Size(223, 301);
             this.Debug.TabIndex = 4;
             // 
             // button1
@@ -531,6 +592,7 @@ namespace GoMapBot
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.checkBox_MapScreenshots);
             this.groupBox3.Controls.Add(this.button_ShowArea);
             this.groupBox3.Controls.Add(this.numericUpDown4);
             this.groupBox3.Controls.Add(this.numericUpDown2);
@@ -544,6 +606,18 @@ namespace GoMapBot
             this.groupBox3.TabIndex = 40;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Working area";
+            // 
+            // checkBox_MapScreenshots
+            // 
+            this.checkBox_MapScreenshots.AutoSize = true;
+            this.checkBox_MapScreenshots.Location = new System.Drawing.Point(115, 76);
+            this.checkBox_MapScreenshots.Name = "checkBox_MapScreenshots";
+            this.checkBox_MapScreenshots.Size = new System.Drawing.Size(107, 17);
+            this.checkBox_MapScreenshots.TabIndex = 45;
+            this.checkBox_MapScreenshots.Text = "Map screenshots";
+            this.checkBox_MapScreenshots.UseVisualStyleBackColor = true;
+            this.checkBox_MapScreenshots.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HandleCheckboxInput);
+            this.checkBox_MapScreenshots.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HandleCheckboxInput);
             // 
             // button_ShowArea
             // 
@@ -645,11 +719,296 @@ namespace GoMapBot
             this.label3.TabIndex = 41;
             this.label3.Text = "Stop with Escape (Esc) key";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label14);
+            this.groupBox4.Controls.Add(this.numericUpDown15);
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Controls.Add(this.numericUpDown14);
+            this.groupBox4.Controls.Add(this.numericUpDown9);
+            this.groupBox4.Controls.Add(this.label13);
+            this.groupBox4.Controls.Add(this.label9);
+            this.groupBox4.Controls.Add(this.numericUpDown13);
+            this.groupBox4.Controls.Add(this.numericUpDown12);
+            this.groupBox4.Controls.Add(this.numericUpDown8);
+            this.groupBox4.Controls.Add(this.numericUpDown7);
+            this.groupBox4.Controls.Add(this.label10);
+            this.groupBox4.Controls.Add(this.label11);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.numericUpDown11);
+            this.groupBox4.Controls.Add(this.numericUpDown10);
+            this.groupBox4.Controls.Add(this.numericUpDown6);
+            this.groupBox4.Controls.Add(this.numericUpDown5);
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Location = new System.Drawing.Point(12, 315);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(471, 180);
+            this.groupBox4.TabIndex = 42;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Timing [ms]";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(247, 154);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(105, 13);
+            this.label14.TabIndex = 59;
+            this.label14.Text = "MapMovementSteps";
+            // 
+            // numericUpDown15
+            // 
+            this.numericUpDown15.Location = new System.Drawing.Point(410, 150);
+            this.numericUpDown15.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown15.Name = "numericUpDown15";
+            this.numericUpDown15.Size = new System.Drawing.Size(55, 20);
+            this.numericUpDown15.TabIndex = 31;
+            this.numericUpDown15.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HandleNumericUpDownInput);
+            this.numericUpDown15.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HandleNumericUpDownInput);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(247, 123);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(122, 13);
+            this.label12.TabIndex = 57;
+            this.label12.Text = "WaitAfterMapMovement";
+            // 
+            // numericUpDown14
+            // 
+            this.numericUpDown14.Location = new System.Drawing.Point(410, 119);
+            this.numericUpDown14.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown14.Name = "numericUpDown14";
+            this.numericUpDown14.Size = new System.Drawing.Size(55, 20);
+            this.numericUpDown14.TabIndex = 30;
+            this.numericUpDown14.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HandleNumericUpDownInput);
+            this.numericUpDown14.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HandleNumericUpDownInput);
+            // 
+            // numericUpDown9
+            // 
+            this.numericUpDown9.Location = new System.Drawing.Point(175, 119);
+            this.numericUpDown9.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown9.Name = "numericUpDown9";
+            this.numericUpDown9.Size = new System.Drawing.Size(55, 20);
+            this.numericUpDown9.TabIndex = 25;
+            this.numericUpDown9.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HandleNumericUpDownInput);
+            this.numericUpDown9.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HandleNumericUpDownInput);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 123);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(105, 13);
+            this.label13.TabIndex = 54;
+            this.label13.Text = "WaitAfterSaveToFile";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(247, 71);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(136, 13);
+            this.label9.TabIndex = 52;
+            this.label9.Text = "WaitAfterMapSetCursorPos";
+            // 
+            // numericUpDown13
+            // 
+            this.numericUpDown13.Location = new System.Drawing.Point(410, 93);
+            this.numericUpDown13.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown13.Name = "numericUpDown13";
+            this.numericUpDown13.Size = new System.Drawing.Size(55, 20);
+            this.numericUpDown13.TabIndex = 29;
+            this.numericUpDown13.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HandleNumericUpDownInput);
+            this.numericUpDown13.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HandleNumericUpDownInput);
+            // 
+            // numericUpDown12
+            // 
+            this.numericUpDown12.Location = new System.Drawing.Point(410, 67);
+            this.numericUpDown12.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown12.Name = "numericUpDown12";
+            this.numericUpDown12.Size = new System.Drawing.Size(55, 20);
+            this.numericUpDown12.TabIndex = 28;
+            this.numericUpDown12.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HandleNumericUpDownInput);
+            this.numericUpDown12.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HandleNumericUpDownInput);
+            // 
+            // numericUpDown8
+            // 
+            this.numericUpDown8.Location = new System.Drawing.Point(175, 93);
+            this.numericUpDown8.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown8.Name = "numericUpDown8";
+            this.numericUpDown8.Size = new System.Drawing.Size(55, 20);
+            this.numericUpDown8.TabIndex = 24;
+            this.numericUpDown8.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HandleNumericUpDownInput);
+            this.numericUpDown8.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HandleNumericUpDownInput);
+            // 
+            // numericUpDown7
+            // 
+            this.numericUpDown7.Location = new System.Drawing.Point(175, 67);
+            this.numericUpDown7.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown7.Name = "numericUpDown7";
+            this.numericUpDown7.Size = new System.Drawing.Size(55, 20);
+            this.numericUpDown7.TabIndex = 23;
+            this.numericUpDown7.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HandleNumericUpDownInput);
+            this.numericUpDown7.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HandleNumericUpDownInput);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 97);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(134, 13);
+            this.label10.TabIndex = 49;
+            this.label10.Text = "WaitAfterSourceCodeCopy";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 71);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(157, 13);
+            this.label11.TabIndex = 46;
+            this.label11.Text = "WaitAfterGymInfoSelectionClick";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(247, 45);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(127, 13);
+            this.label7.TabIndex = 45;
+            this.label7.Text = "WaitAfterClearGymPopup";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(247, 19);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(96, 13);
+            this.label6.TabIndex = 44;
+            this.label6.Text = "WaitAfterCloseTab";
+            // 
+            // numericUpDown11
+            // 
+            this.numericUpDown11.Location = new System.Drawing.Point(410, 41);
+            this.numericUpDown11.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown11.Name = "numericUpDown11";
+            this.numericUpDown11.Size = new System.Drawing.Size(55, 20);
+            this.numericUpDown11.TabIndex = 27;
+            this.numericUpDown11.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HandleNumericUpDownInput);
+            this.numericUpDown11.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HandleNumericUpDownInput);
+            // 
+            // numericUpDown10
+            // 
+            this.numericUpDown10.Location = new System.Drawing.Point(410, 15);
+            this.numericUpDown10.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown10.Name = "numericUpDown10";
+            this.numericUpDown10.Size = new System.Drawing.Size(55, 20);
+            this.numericUpDown10.TabIndex = 26;
+            this.numericUpDown10.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HandleNumericUpDownInput);
+            this.numericUpDown10.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HandleNumericUpDownInput);
+            // 
+            // numericUpDown6
+            // 
+            this.numericUpDown6.Location = new System.Drawing.Point(175, 41);
+            this.numericUpDown6.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown6.Name = "numericUpDown6";
+            this.numericUpDown6.Size = new System.Drawing.Size(55, 20);
+            this.numericUpDown6.TabIndex = 22;
+            this.numericUpDown6.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HandleNumericUpDownInput);
+            this.numericUpDown6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HandleNumericUpDownInput);
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.Location = new System.Drawing.Point(175, 15);
+            this.numericUpDown5.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(55, 20);
+            this.numericUpDown5.TabIndex = 21;
+            this.numericUpDown5.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HandleNumericUpDownInput);
+            this.numericUpDown5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HandleNumericUpDownInput);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 45);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(134, 13);
+            this.label4.TabIndex = 41;
+            this.label4.Text = "WaitAfterGymInfoSelection";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 19);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(95, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "WaitAfterGymClick";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(247, 97);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(159, 13);
+            this.label8.TabIndex = 53;
+            this.label8.Text = "WaitAfterMapContourMovement";
+            // 
             // GoMapBot
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(448, 319);
+            this.ClientSize = new System.Drawing.Size(495, 505);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -665,7 +1024,7 @@ namespace GoMapBot
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "GoMapBot";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GoMapBot by Celegast (v1.0)";
+            this.Text = "GoMapBot by Celegast (v1.1)";
             this.Load += new System.EventHandler(this.GoMapBot_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GymParser)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -679,6 +1038,19 @@ namespace GoMapBot
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MoveMapTimer)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -940,6 +1312,14 @@ namespace GoMapBot
     Debug.AppendText(String.Format("Sector {0}: {1}\r\n", _sector, _gyms.Count));
 #endif
 
+                        if (_mapScreenshots)
+                        {
+                            // Store (map) image of the working area
+                            //Rectangle section = new Rectangle(_startingPoint, _workingArea);
+                            Rectangle section = new Rectangle(new Point(0, _startingPoint.Y - _mapScreenshotTopPadding), new Size(_screenSize.Width, _workingArea.Height + _mapScreenshotTopPadding));
+                            _mapBitmap = _desktopBitmap.Clone(section, _desktopBitmap.PixelFormat);
+                        }
+
                         GymParser.Interval = 1.0;
                         _state = STATE.PARSE_GYMS;
                     }
@@ -1077,6 +1457,13 @@ namespace GoMapBot
                         //Debug.AppendText(Clipboard.GetText());
                         AppendToFile(_output_file_name, String.Format("{0}<td>{1}</td>", Clipboard.GetText(), _sector)); // Add sector number to clipboard text
 
+                        if (_mapScreenshots)
+                        {
+                            // Add gym name to image
+                            Point p = new Point(_gym_point.X, _gym_point.Y - _startingPoint.Y + _mapScreenshotTopPadding); // Relative coordinates
+                            AddGymTagToImage(ref _mapBitmap, p, ParseGymName(Clipboard.GetText()));
+                        }
+
                         GymParser.Interval = _gymParserTiming[4];
                         _state = STATE.CLOSE_TAB;
                     }
@@ -1109,6 +1496,12 @@ namespace GoMapBot
                     break;
                 case STATE.MOVE_MAP:
                     {
+                        if (_mapScreenshots)
+                        {
+                            // Save map image
+                            SaveMapImage(ref _mapBitmap, String.Format("{0}.png", _sector));
+                        }
+
                         if (_path.Count == 0)
                         {
                             GymParser.Interval = 1.0;
@@ -1151,6 +1544,59 @@ namespace GoMapBot
         }
 
 
+        #region Map image
+
+        /// <summary>
+        /// Save map image (with gym tags) to file.
+        /// </summary>
+        private void SaveMapImage(ref Bitmap mapBitmap, string filename)
+        {
+            // ToDo: Check whether 'map'-folder exists and create it, if necessary
+            System.IO.Directory.CreateDirectory(_map_folder_name);
+
+            mapBitmap.Save(_map_folder_name + "\\" + filename);
+        }
+
+        /// <summary>
+        /// Save map image (with gym tags) to file.
+        /// </summary>
+        private void AddGymTagToImage(ref Bitmap mapBitmap, Point pos, string tag)
+        {
+            StringFormat strFormat = new StringFormat();
+            strFormat.Alignment = StringAlignment.Center;
+            strFormat.LineAlignment = StringAlignment.Center;
+
+            Graphics g = Graphics.FromImage(mapBitmap);
+
+            Font f = new Font("Tahoma", 16);
+            //SizeF tagSize = g.MeasureString(tag, f);
+
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+
+            pos.Y -= 23; // Position it slightly above the actual gym icon
+            if (pos.Y < 0) pos.Y = 0;
+
+            g.DrawString(
+                tag,
+                f,
+                Brushes.Black,
+                pos, //new RectangleF(pos.X, pos.Y, 250, 20),
+                strFormat
+            );
+        }
+
+        private string ParseGymName(string s)
+        {
+            string ret = "";
+            string[] cells = s.Split(new string[] {"</td>"}, StringSplitOptions.None);
+
+            if (cells.Length > 0)
+                ret = cells[0].Replace("<td>", ""); // Delete front '<td>'
+
+            return ret;
+        }
+
+        #endregion
 
         private enum MOVEMAPSTATE { STOPPED, START, MOVE_MAP };
         private MOVEMAPSTATE _movemap_state = MOVEMAPSTATE.STOPPED;
@@ -1673,37 +2119,51 @@ namespace GoMapBot
                             
                             case "WaitAfterGymClick":
                                 _gymParserTiming[0] = Int32.Parse(split_line[1]);
+                                numericUpDown5.Value = (decimal)_gymParserTiming[0];
                                 break;
                             case "WaitAfterGymInfoSelection":
                                 _gymParserTiming[1] = Int32.Parse(split_line[1]);
+                                numericUpDown6.Value = (decimal)_gymParserTiming[1];
                                 break;
                             case "WaitAfterGymInfoSelectionClick":
                                 _gymParserTiming[2] = Int32.Parse(split_line[1]);
+                                numericUpDown7.Value = (decimal)_gymParserTiming[2];
                                 break;
                             case "WaitAfterSourceCodeCopy":
                                 _gymParserTiming[3] = Int32.Parse(split_line[1]);
+                                numericUpDown8.Value = (decimal)_gymParserTiming[3];
                                 break;
                             case "WaitAfterSaveToFile":
                                 _gymParserTiming[4] = Int32.Parse(split_line[1]);
+                                numericUpDown9.Value = (decimal)_gymParserTiming[4];
                                 break;
                             case "WaitAfterCloseTab":
                                 _gymParserTiming[5] = Int32.Parse(split_line[1]);
+                                numericUpDown10.Value = (decimal)_gymParserTiming[5];
                                 break;
                             case "WaitAfterClearGymPopup":
                                 _gymParserTiming[6] = Int32.Parse(split_line[1]);
+                                numericUpDown11.Value = (decimal)_gymParserTiming[6];
                                 break;
 
                             case "WaitAfterMapSetCursorPos":
                                 _moveMapTiming[0] = Int32.Parse(split_line[1]);
+                                numericUpDown12.Value = (decimal)_moveMapTiming[0];
                                 break;
                             case "WaitAfterMapContourMovement":
                                 _moveMapTiming[1] = Int32.Parse(split_line[1]);
+                                numericUpDown13.Value = (decimal)_moveMapTiming[1];
                                 break;
                             case "WaitAfterMapMovement":
                                 _moveMapTiming[2] = Int32.Parse(split_line[1]);
+                                numericUpDown14.Value = (decimal)_moveMapTiming[2];
                                 break;
                             case "MapMovementSteps":
                                 _movementSteps = Int32.Parse(split_line[1]);
+                                numericUpDown15.Value = (decimal)_movementSteps;
+                                break;
+                            case "MapScreenshots":
+                                _mapScreenshots = checkBox_MapScreenshots.Checked = (split_line[1] == "True") ? true : false;
                                 break;
                         }
                     }
@@ -1755,6 +2215,8 @@ namespace GoMapBot
                 tw.WriteLine("WaitAfterMapMovement:" + _moveMapTiming[2]);
 
                 tw.WriteLine("MapMovementSteps:" + _movementSteps);
+
+                tw.WriteLine("MapScreenshots:" + _mapScreenshots);
 
                 tw.Close();
             }
@@ -1867,6 +2329,28 @@ namespace GoMapBot
                 _workingArea.Width = (int)sender.Value;
             else if (sender == numericUpDown4)
                 _workingArea.Height = (int)sender.Value;
+            else if (sender == numericUpDown5)
+                _gymParserTiming[0] = (int)sender.Value;
+            else if (sender == numericUpDown6)
+                _gymParserTiming[1] = (int)sender.Value;
+            else if (sender == numericUpDown7)
+                _gymParserTiming[2] = (int)sender.Value;
+            else if (sender == numericUpDown8)
+                _gymParserTiming[3] = (int)sender.Value;
+            else if (sender == numericUpDown9)
+                _gymParserTiming[4] = (int)sender.Value;
+            else if (sender == numericUpDown10)
+                _gymParserTiming[5] = (int)sender.Value;
+            else if (sender == numericUpDown11)
+                _gymParserTiming[6] = (int)sender.Value;
+            else if (sender == numericUpDown12)
+                _moveMapTiming[0] = (int)sender.Value;
+            else if (sender == numericUpDown13)
+                _moveMapTiming[1] = (int)sender.Value;
+            else if (sender == numericUpDown14)
+                _moveMapTiming[2] = (int)sender.Value;
+            else if (sender == numericUpDown15)
+                _movementSteps = (int)sender.Value;
 
             SaveConfiguration(CFGFILENAME);
         }
@@ -1885,6 +2369,9 @@ namespace GoMapBot
         {
             if (sender == checkBox_OutputTimestamp)
                 _outputTimestamp = sender.Checked;
+
+            if (sender == checkBox_MapScreenshots)
+                _mapScreenshots = sender.Checked;
 
             SaveConfiguration(CFGFILENAME);
         }
