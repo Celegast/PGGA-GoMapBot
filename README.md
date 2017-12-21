@@ -44,11 +44,14 @@ See [Setup](https://github.com/Celegast/PGGA-GoMapBot#setup).
 Path on the map. Enter cardinal points ("N", "E", "S", "W") only, separated by a blank. The map gets dragged in the assigned direction by the amount of pixels specified in the [Working Area](https://github.com/Celegast/PGGA-GoMapBot#working-area) (width/height).
 #### Working area
 Screen area where gyms are looked for. Make sure to leave enough room for a maxed gyms' popup to be fully visible. If you have a different screen resolution than 1920x1080, or the layout of the map changes, then adjust these values accordingly. You can check the area by clicking on _Show area_, which moves the mouse pointer to each corner.
+
+Enable _Map screenshots_ to save sector images (png-files) to subfolder _/map_. All gyms get labelled in this process.
+#### Timing [ms]
+* **WaitAfter\***: Time in ms after said action.
+* **MapMovementSteps**: Number of mouse steps used for map movement. Goes hand in hand with _WaitAfterMapContourMovement_(!), as \#steps \* WaitAfterMapContourMovement = TimeForMovement
 #### config.dat
 * **PopupSize**: Minimum dimension of the gym popup. Used to speed up the bitmap detection process.
-* **MapMovementPenalty**: To make sure gyms right on the edge of the working area are not missed, the map movement is reduced by this amount of pixels. Double reading get filtered out in the _PGGA-Interface_.
+* **MapMovementPenalty**: To make sure gyms right on the edge of the working area are not missed, the map movement is reduced by this amount of pixels. Double readings get filtered out in the _PGGA-Interface_.
 * **BrightnessThreshold**: Threshold of pixel brightness to detect gym icons.
 * **DotSize**: Number of pixels in X/Y-direction to detect gym icons.
 * **ForbiddenAreaRadius**: Once a gym icon is detected, the (pixel-)area around it will be locked to prevent multiple detections of the same gym.
-* **WaitAfter\***: Time in ms after said action.
-* **MapMovementSteps**: Number of mouse steps used for map movement. Goes hand in hand with _WaitAfterMapContourMovement_(!), as \#steps \* WaitAfterMapContourMovement = TimeForMovement
